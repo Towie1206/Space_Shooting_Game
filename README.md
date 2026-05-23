@@ -1,137 +1,137 @@
-# Space Shooting Game
+# 🚀 Space Shooting Game
 
 A 2D space shooter built with Unity, featuring wave-based enemy spawning, a leveling system, boss encounters, and a parallax space environment.
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-| Công nghệ | Mô tả |
+| Technology | Description |
 |---|---|
-| **Unity** | Game engine chính (2D) |
-| **C#** | Ngôn ngữ lập trình |
-| **TextMesh Pro** | Hiển thị text UI |
-| **Unity Physics 2D** | Va chạm, Rigidbody |
-| **Unity Animator** | Animation state machine cho player và boss |
-| **Unity Particle System** | Hiệu ứng boost, vụ nổ |
+| **Unity** | Main game engine (2D) |
+| **C#** | Programming language |
+| **TextMesh Pro** | UI text rendering |
+| **Unity Physics 2D** | Collision detection, Rigidbody |
+| **Unity Animator** | Animation state machine for player and bosses |
+| **Unity Particle System** | Boost and explosion visual effects |
 
 ---
 
-## Gameplay
+## 🎮 Gameplay
 
-Người chơi điều khiển tàu vũ trụ bay qua không gian, tiêu diệt kẻ địch và né tránh chướng ngại vật. Mục tiêu là sống sót và đạt được điểm kinh nghiệm để nâng cấp vũ khí.
+The player controls a spaceship flying through space, eliminating enemies and dodging obstacles. The goal is to survive, collect experience, and keep upgrading your weapon.
 
-### Điều khiển
+### Controls
 
-| Phím | Hành động |
+| Key | Action |
 |---|---|
-| `W A S D` / Arrow Keys | Di chuyển |
-| `Mouse Left Click` | Bắn |
-| `Space` / `Left Alt` | Kích hoạt Boost |
+| `W A S D` / Arrow Keys | Move |
+| `Left Mouse Click` | Shoot |
+| `Space` / `Left Alt` | Activate Boost |
 | `Escape` | Pause |
 
-### Cơ chế chính
+### Core Mechanics
 
 **Boost**
-- Tiêu thụ Energy để tăng tốc độ thế giới, giúp di chuyển nhanh hơn
-- Energy tự hồi sinh theo thời gian khi không boost
-- Nếu hết Energy, Boost tự tắt
+- Consumes Energy to increase world speed, letting the player move faster relative to the environment
+- Energy regenerates automatically when not boosting
+- Boost deactivates automatically if Energy runs out
 
-**Hệ thống Level Up**
-- Tiêu diệt kẻ địch và thiên thạch để nhận Experience
-- Đủ EXP → lên level, tăng máu tối đa và nâng cấp vũ khí
-- Vũ khí mạnh hơn bắn nhiều đạn hơn với khoảng cách rộng hơn
+**Level Up System**
+- Destroying enemies and asteroids grants Experience points
+- Gaining enough EXP levels up the player, increasing max health and upgrading the weapon
+- Higher weapon levels fire more bullets spread across a wider vertical range
 
 **Phaser Weapon**
-- Level 1: 1 viên đạn
-- Level cao hơn: nhiều viên đạn bắn đồng thời, trải rộng theo chiều dọc
+- Level 1: single bullet
+- Higher levels: multiple simultaneous bullets spread vertically
 
 ---
 
-## Danh sách kẻ địch
+## 👾 Enemies
 
 ### Critter
-Sinh vật nhỏ di chuyển ngẫu nhiên trong màn hình. Không bắn được bằng đạn — chỉ tiêu diệt được bằng cách đâm thẳng vào. Khi tiêu diệt đủ 10 Critter, Boss sẽ xuất hiện.
+Small creatures that wander randomly across the screen. Cannot be destroyed by bullets — only by direct collision with the player or a bullet tag. Killing 10 Critters triggers a Boss spawn.
 
 ### Beetlemorph
-Di chuyển theo đường **sóng hình sin** (sine wave) theo trục Y, tạo ra quỹ đạo lượn sóng khó đoán. Có nhiều biến thể sprite ngẫu nhiên.
+Moves in a **sine wave** pattern along the Y axis, creating an unpredictable weaving trajectory. Spawns with a randomly chosen sprite variant.
 
 ### Locustmorph
-Có 2 phase:
-- **Idle**: Di chuyển chậm, lơ lửng
-- **Charge**: Khi còn dưới 50% máu, lao thẳng về phía trái với tốc độ cao. Có nhiều variant hình dạng khác nhau.
+Has two phases:
+- **Idle**: Drifts slowly across the screen
+- **Charge**: Once health drops below 50%, it charges hard to the left at high speed. Comes in multiple sprite variants.
 
 ### SquidMorph
-Luôn xoay mặt về phía người chơi. Cứ 2 giây phóng ra **SquidCritter** nhắm thẳng vào người chơi.
+Always rotates to face the player. Every 2 seconds it fires a **SquidCritter** directly toward the player.
 
 ### SquidCritter
-Được phóng ra từ SquidMorph. Sau pha phóng ban đầu, tự động **bám đuổi người chơi** và xoay mặt theo hướng di chuyển.
+Launched from a SquidMorph. After the initial launch burst, it **homes in on the player** and continuously rotates to face its movement direction.
 
 ---
 
-## Boss
+## 💀 Bosses
 
 ### Boss 1 — Charge Boss
-Xuất hiện mỗi khi người chơi tiêu diệt đủ **10 Critter**. Có 2 trạng thái:
-- **Patrol**: Lơ lửng di chuyển lên xuống ngẫu nhiên
-- **Charge**: Lao nhanh về phía trái nhắm vào người chơi
+Spawns every time the player kills **10 Critters**. Switches between two states:
+- **Patrol**: Drifts up and down randomly
+- **Charge**: Lunges hard to the left toward the player
 
-Khi người chơi Boost, Boss điều chỉnh tốc độ di chuyển theo. Có animation riêng cho từng trạng thái.
+Adjusts its movement speed when the player activates Boost. Has a dedicated animation for each state.
 
 ### Boss 2
-Di chuyển theo pattern bounce: lao từ phải sang trái, sau đó quay lại từ trái sang phải với tốc độ cao. Chuyển trạng thái dựa theo vị trí X trên màn hình.
+Moves in a bounce pattern: charges from left to right at high speed, then slowly drifts back the other way. Switches state based on its X position on screen.
 
 ---
 
-## Chướng ngại vật
+## 🌌 Obstacles
 
 ### Asteroid
-- Kích thước ngẫu nhiên (0.5x – 1.5x)
-- Chịu được **5 đòn** trước khi bị phá hủy
-- Rơi theo hướng ngẫu nhiên, va chạm vật lý thực
-- Cho EXP khi bị bắn hạ (không cho EXP nếu bị Boss phá)
+- Spawns at a random size (0.5x – 1.5x scale)
+- Takes **5 hits** to destroy
+- Drifts in a random direction with real physics
+- Grants EXP when destroyed by the player (no EXP if destroyed by a Boss)
 
 ### Whale
-Sinh vật vũ trụ di chuyển cùng chiều với thế giới. Chạm vào **LostWhale** (cá voi đặc biệt) sẽ hoàn thành màn chơi.
+A space creature that drifts along with the world. Touching the special **LostWhale** completes the level.
 
 ---
 
-## Kiến trúc kỹ thuật
+## 🏗️ Technical Architecture
 
 ### Singleton Pattern
-Các manager dùng chung Singleton để truy cập toàn cục:
-- `GameManager` — quản lý tốc độ thế giới, boss spawn, game over
-- `PlayerController` — trạng thái người chơi
-- `PhaserWeapon` — bắn đạn
-- `AudioManager` — phát âm thanh
+Core managers use the Singleton pattern for global access:
+- `GameManager` — world speed, boss spawning, game over flow
+- `PlayerController` — player state, health, energy, leveling
+- `PhaserWeapon` — shooting logic
+- `AudioManager` — sound playback with pitch randomization
 
 ### Object Pooling
-Toàn bộ đạn, kẻ địch, hiệu ứng nổ đều dùng **Object Pool** thay vì `Instantiate/Destroy` để tối ưu performance. Pool tự mở rộng khi cần.
+All bullets, enemies, and explosion effects use an **Object Pool** instead of `Instantiate/Destroy` calls, keeping performance smooth. The pool auto-expands when all objects are in use.
 
-### Hệ thống Wave Spawner
-`ObjectSpawner` quản lý spawn theo wave tuần tự. Mỗi wave có:
-- Pool đối tượng riêng
-- Thời gian spawn interval
-- Số lượng object tối đa trước khi chuyển wave tiếp theo
+### Wave Spawner
+`ObjectSpawner` manages sequential wave spawning. Each wave has its own:
+- Object pool reference
+- Spawn interval timer
+- Maximum object count before advancing to the next wave
 
-### Enemy Base Class
-Tất cả kẻ địch kế thừa từ class `Enemy`, chia sẻ logic chung: nhận damage, flash trắng khi trúng đạn, chết và cho EXP. Từng loại enemy override các phương thức cần thiết.
+### Enemy Inheritance
+All enemies inherit from the `Enemy` base class, which handles shared logic: taking damage, flashing white on hit, dying, and granting EXP. Each enemy type overrides only what it needs.
 
 ### Parallax Background
-Nhiều lớp background di chuyển với tốc độ khác nhau tạo chiều sâu không gian. Menu cũng có parallax riêng.
+Multiple background layers scroll at different speeds to create a sense of depth. The main menu has its own parallax system as well.
 
 ---
 
-## Cấu trúc project
+## 📁 Project Structure
 
 ```
 Assets/
 ├── Script/
-│   ├── Enemies/        # Beetlemorph, Locustmorph, SquidMorph, Boss1, Boss2...
-│   ├── Weapons/        # PhaserWeapon, PhaserBullet, Weapon base
+│   ├── Enemies/        # Beetlemorph, Locustmorph, SquidMorph, SquidCritter, Boss1, Boss2, Critter1
+│   ├── Weapons/        # PhaserWeapon, PhaserBullet, Weapon (base)
 │   ├── Obstacles/      # Asteroid, Whale, LostWhale
 │   ├── MenuScene/      # MenuManager, MenuParallax
-│   ├── Utils/          # FlashWhite, FloatInSpace, FaceMovementDirection...
+│   ├── Utils/          # FlashWhite, FloatInSpace, FaceMovementDirection, DestroyWhenAnimationFinished
 │   ├── GameManager.cs
 │   ├── PlayerController.cs
 │   ├── AudioManager.cs
@@ -143,15 +143,15 @@ Assets/
 
 ---
 
-## Chạy project
+## 🚀 Getting Started
 
-1. Clone repo về máy
-2. Mở bằng **Unity Hub** (khuyến nghị Unity 6. trở lên)
-3. Mở scene `MainMenu` để bắt đầu từ menu
-4. Hoặc mở trực tiếp scene `Level 1` để test gameplay
+1. Clone the repository
+2. Open with **Unity Hub** (Unity 2022.x or later recommended)
+3. Open the `MainMenu` scene to start from the main menu
+4. Or open `Level 1` directly to jump into gameplay
 
 ---
 
-## Tác giả
+## 👤 Author
 
 **Towie1206**
