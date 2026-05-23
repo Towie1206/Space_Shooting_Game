@@ -146,7 +146,7 @@ Assets/
 ## 🚀 Getting Started
 
 1. Clone the repository
-2. Open with **Unity Hub** (Unity 2022.x or later recommended)
+2. Open with **Unity Hub** (Unity 6. or later recommended)
 3. Open the `MainMenu` scene to start from the main menu
 4. Or open `Level 1` directly to jump into gameplay
 
